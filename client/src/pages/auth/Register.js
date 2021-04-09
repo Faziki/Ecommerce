@@ -4,24 +4,24 @@ import { notification } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 
 const Register = () => {
-  //moved the data such as message description and icon to  line 25 notification.open (testing purposes)
 
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
-      url: "http://localhost:3000/register/complete",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
     await auth.sendSignInLinkToEmail(email, config);
 
-    notification.open({
+    notification.success({
       message: "Registraton confirmed",
       description: `Email is sent to ${email}. Click the link to complete your registration `,
       icon: <SmileOutlined style={{ color: "#108ee9" }} />,
     });
+
     // save user email in local storage
     window.localStorage.setItem("emailForRegistration", email);
     // clear state
