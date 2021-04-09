@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-// import { auth } from "../../firebase";
+import { auth } from "../../firebase";
 import { notification } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 
 const Register = () => {
   //moved the data such as message description and icon to  line 25 notification.open (testing purposes)
-  const openNotification = () => {};
 
-  const [email, setEmail, name, setName, password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,15 +15,22 @@ const Register = () => {
       handleCodeInApp: true,
     };
 
-    // await auth.sendSignInLinkToEmail(email, config);
+    await auth.sendSignInLinkToEmail(email, config);
 
     notification.open({
-      message: "Notification Title",
-      description:
-        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      message: "Registraton confirmed",
+      description: `Email is sent to ${email}. Click the link to complete your registration `,
       icon: <SmileOutlined style={{ color: "#108ee9" }} />,
     });
+    // save user email in local storage
+    window.localStorage.setItem("emailForRegistration", email);
+    // clear state
+    setEmail("");
   };
+
+  //need to find out how to pass the on submit to the notifcation
+  //else this will trigger everytime you press 'register' button withou validating
+  // that the data has been sent
 
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
@@ -37,7 +43,6 @@ const Register = () => {
           type="text"
           className="form-control"
           id="nameInput"
-          value={name}
         ></input>
         <span className="bmd-help">Please type in your name</span>
       </div>
@@ -80,24 +85,9 @@ const Register = () => {
         ></input>
         <span className="bmd-help">Please retype your password as above</span>
       </div>
-      <button
-        type="submit"
-        className="btn btn-raised"
-        onClick={() => openNotification("bottomRight")}
-      >
+      <button type="submit" className="btn btn-raised">
         Register
       </button>
-      {/*       
-      <input type="text" className="form-control" value="name" />
-      <input
-        type="email"
-        className="form-control"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        autoFocus
-      />
-
-     */}
     </form>
   );
   return (

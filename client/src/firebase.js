@@ -1,4 +1,5 @@
-import * as firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -9,10 +10,10 @@ const firebaseConfig = {
   messagingSenderId: "196960366878",
   appId: "1:196960366878:web:15e1e6601dced4e9c8990f",
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-//export
-
+// export
 export const auth = firebase.auth();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
