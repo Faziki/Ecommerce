@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { notification } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 
 const Register = () => {
-
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
@@ -19,7 +18,7 @@ const Register = () => {
     notification.success({
       message: "Registraton confirmed",
       description: `Email is sent to ${email}. Click the link to complete your registration `,
-      icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+      icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
     });
 
     // save user email in local storage
@@ -34,7 +33,7 @@ const Register = () => {
 
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      {/* <div className="form-group">
         <label id="nameInput" className="bmd-label-floating">
           Name
         </label>
@@ -45,13 +44,14 @@ const Register = () => {
           id="nameInput"
         ></input>
         <span className="bmd-help">Please type in your name</span>
-      </div>
+      </div> */}
 
       <div className="form-group">
         <label id="emailAddress" className="bmd-label-floating">
           Email address
         </label>
         <input
+          autoFocus
           type="email"
           className="form-control"
           id="emailAddress"
@@ -60,7 +60,7 @@ const Register = () => {
         ></input>
         <span className="bmd-help">Please type in your email address</span>
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
         <label id="passwordInput" className="bmd-label-floating">
           Password
         </label>
@@ -84,7 +84,7 @@ const Register = () => {
           id="passwordRepeat"
         ></input>
         <span className="bmd-help">Please retype your password as above</span>
-      </div>
+      </div> */}
       <button type="submit" className="btn btn-raised">
         Register
       </button>
