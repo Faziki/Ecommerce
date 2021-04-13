@@ -27,25 +27,8 @@ const Register = () => {
     setEmail("");
   };
 
-  //need to find out how to pass the on submit to the notifcation
-  //else this will trigger everytime you press 'register' button withou validating
-  // that the data has been sent
-
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
-      {/* <div className="form-group">
-        <label id="nameInput" className="bmd-label-floating">
-          Name
-        </label>
-        <input
-          autoFocus
-          type="text"
-          className="form-control"
-          id="nameInput"
-        ></input>
-        <span className="bmd-help">Please type in your name</span>
-      </div> */}
-
       <div className="form-group">
         <label id="emailAddress" className="bmd-label-floating">
           Email address
@@ -60,31 +43,6 @@ const Register = () => {
         ></input>
         <span className="bmd-help">Please type in your email address</span>
       </div>
-      {/* <div className="form-group">
-        <label id="passwordInput" className="bmd-label-floating">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="passwordInput"
-        ></input>
-        <span className="bmd-help">
-          Please type in a strong password (Make use of captial letters and
-          special characters $%@#)
-        </span>
-      </div>
-      <div className="form-group">
-        <label id="passwordRepeat" className="bmd-label-floating">
-          Repeat Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="passwordRepeat"
-        ></input>
-        <span className="bmd-help">Please retype your password as above</span>
-      </div> */}
       <button type="submit" className="btn btn-raised">
         Register
       </button>
