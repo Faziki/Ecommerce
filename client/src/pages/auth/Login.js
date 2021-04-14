@@ -116,6 +116,11 @@ const Login = ({ history }) => {
           Login with Google
         </Button>
       </div>
+      <div className="float-right">
+        <Button danger type="link">
+          Forgot password?
+        </Button>
+      </div>
     </form>
   );
   return (
