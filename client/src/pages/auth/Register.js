@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { notification } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
-const Register = () => {
+const Register = ({ history }) => {
   const [email, setEmail] = useState("");
+  const { user } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,8 +49,8 @@ const Register = () => {
         ></input>
         <span className="bmd-help">Please type in your email address</span>
       </div>
-      <button type="submit" className="btn btn-raised">
-        Register
+      <button disabled={!email} type="submit" className="btn btn-raised">
+        Register account
       </button>
     </form>
   );

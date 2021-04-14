@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, notification } from "antd"; //
 import {
   MailOutlined,
@@ -6,12 +6,18 @@ import {
   CloseCircleTwoTone,
 } from "@ant-design/icons";
 import { auth, googleAuthProvider } from "../../firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user]);
 
   let dispatch = useDispatch();
 
@@ -117,9 +123,9 @@ const Login = ({ history }) => {
         </Button>
       </div>
       <div className="float-right">
-        <Button danger type="link">
+        <Link to="/forgot/password" className="text-danger">
           Forgot password?
-        </Button>
+        </Link>
       </div>
     </form>
   );
