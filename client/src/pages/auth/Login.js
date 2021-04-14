@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-// import { auth } from "../../firebase";
-import { Button, notification } from "antd";
+import { Button, notification } from "antd"; //
 import {
   MailOutlined,
   GoogleOutlined,
   CloseCircleTwoTone,
 } from "@ant-design/icons";
-import { auth } from "../../firebase";
+import { auth, googleAuthProvider } from "../../firebase";
 import { useDispatch } from "react-redux";
 
 const Login = ({ history }) => {
@@ -38,6 +37,31 @@ const Login = ({ history }) => {
       });
       setLoading(false);
     }
+  };
+  const googleLogin = async () => {
+    setLoading(true);
+    auth
+      .signInWithPopup(googleAuthProvider)
+      .then(async (result) => {
+        const { user } = result;
+        const idTokenResult = await user.getIdTokenResult();
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+        });
+        history.push("/");
+      })
+
+      .catch((error) =>
+        notification.error({
+          description: error.message,
+          icon: <CloseCircleTwoTone twoToneColor="#FF1919" />,
+        })
+      );
+    setLoading(false);
   };
 
   const loginForm = () => (
@@ -84,7 +108,7 @@ const Login = ({ history }) => {
       <div>
         <Button
           icon={<GoogleOutlined />}
-          onClick={handleSubmit}
+          onClick={googleLogin}
           type="danger"
           block
           size="large"
@@ -98,7 +122,7 @@ const Login = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Login</h4>
+          {loading ? <h4>Loading...</h4> : <h4>Login</h4>}
           {loginForm()}
         </div>
       </div>
