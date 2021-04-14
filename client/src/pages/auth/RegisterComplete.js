@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
-import { notification } from "antd";
+import { notification, Button } from "antd";
 import { CloseCircleTwoTone, RocketTwoTone } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
-  }, []);
+    if (user && user.token) history.push("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -137,9 +140,9 @@ const RegisterComplete = ({ history }) => {
         ></input>
         <span className="bmd-help">Please retype your password as above</span>
       </div> */}
-      <button type="submit" className="btn btn-raised">
+      <Button type="submit" primary block size="large">
         Submit
-      </button>
+      </Button>
     </form>
   );
   return (
