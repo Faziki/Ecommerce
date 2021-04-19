@@ -8,7 +8,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
