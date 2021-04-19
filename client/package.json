@@ -1,5 +1,4 @@
 {
-  
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.15.0",
+    "axios": "^0.21.1",
     "bootstrap-material-design": "^4.1.1",
     "firebase": "^8.3.2",
     "react": "^17.0.2",
